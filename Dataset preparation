@@ -1,1 +1,68 @@
+import cv2
+import os
+import numpy as np
+import csv
 
+hog = cv2.HOGDescriptor()
+
+basepath1 = 'COVID19/'
+basepath2 = 'NORMAL/'
+basepath3 = 'PNEUMONIA/'
+covid=[]
+normal=[]
+pneumonia=[]
+imgSize=64
+
+
+for entry in os.listdir(basepath1):
+    if os.path.isfile(os.path.join(basepath1, entry)):
+        covid.append(entry)
+        
+
+for entry in os.listdir(basepath2):
+    if os.path.isfile(os.path.join(basepath2, entry)):
+        normal.append(entry)
+        
+for entry in os.listdir(basepath3):
+    if os.path.isfile(os.path.join(basepath3, entry)):
+        pneumonia.append(entry)
+        
+        
+#csv file create
+c=1
+column=np.arange(0,3781,1)
+with open('otsuhogdata.csv', mode='w',encoding="utf-8",newline='') as file:
+    writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+    writer.writerow(column)
+    for i in range(len(covid)):
+        img = cv2.imread(os.path.join(basepath1, covid[i]), cv2.IMREAD_GRAYSCALE)
+        img=cv2.resize(img,(64,128))
+        t,img=cv2.threshold(img, 0, 255,cv2.THRESH_OTSU)
+        h = hog.compute(img)
+        row=np.resize(h,(1,3780))[0]
+        row=np.append(row,"covid")
+        writer.writerow(row)
+        print(c)
+        c+=1
+        
+    for i in range(len(normal)):
+        img = cv2.imread(os.path.join(basepath2, normal[i]), cv2.IMREAD_GRAYSCALE)
+        img=cv2.resize(img,(64,128))
+        t,img=cv2.threshold(img, 0, 255,cv2.THRESH_OTSU)
+        h = hog.compute(img)
+        row=np.resize(h,(1,3780))[0]
+        row=np.append(row,"normal")
+        writer.writerow(row)
+        print(c)
+        c+=1
+        
+    for i in range(len(pneumonia)):
+        img = cv2.imread(os.path.join(basepath3, pneumonia[i]), cv2.IMREAD_GRAYSCALE)
+        img=cv2.resize(img,(64,128))
+        t,img=cv2.threshold(img, 0, 255,cv2.THRESH_OTSU)
+        h = hog.compute(img)
+        row=np.resize(h,(1,3780))[0]
+        row=np.append(row,"pneumonia")
+        writer.writerow(row)
+        print(c)
+        c+=1
