@@ -1,1 +1,6 @@
 # HOG-CNN
+Coronavirus disease 2019 in short COVID-19 is a contagious disease caused by coronavirus SARS-CoV-2, which has caused a global pandemic and still infecting millions around the globe. COVID-19 has made an enormous impact on everybody’s day-to-day life. One of the main strengths of COVID-19 is its extraordinary infectious capability. Early detection systems can thus play a big role in curbing the exponential growth of COVID-19. Some medical radiography techniques, such as chest X-rays and chest CT scans, are used for fast and reliable detection of coronavirus-induced pneumonia. In this paper, we propose a histogram of oriented gradients and deep convolutional network-based model that can find out the specific abnormality in frontal chest X-ray images and effectively classify the data into COVID-19 positive, pneumonia positive, and normal classes. The proposed system performed effectively in terms of various performance measures and proved capable as an effective early detection system.
+## Cite this article
+Rahman, M.M., Nooruddin, S., Hasan, K.M.A. et al. HOG + CNN Net: Diagnosing COVID-19 and Pneumonia by Deep Neural Network from Chest X-Ray Images. SN COMPUT. SCI. 2, 371 (2021). https://doi.org/10.1007/s42979-021-00762-x
+## Dataset Link: 
+https://www.kaggle.com/datasets/nayem97/autoencoder
